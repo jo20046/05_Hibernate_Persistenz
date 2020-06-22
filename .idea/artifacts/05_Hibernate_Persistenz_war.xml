@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="05_Hibernate_Persistenz:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/05_Hibernate_Persistenz_war</output-path>
+    <root id="archive" name="05_Hibernate_Persistenz_war.war">
+      <element id="artifact" artifact-name="05_Hibernate_Persistenz:war exploded" />
+    </root>
+  </artifact>
+</component>
