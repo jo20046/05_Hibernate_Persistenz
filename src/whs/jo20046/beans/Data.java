@@ -1,6 +1,5 @@
 package whs.jo20046.beans;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -8,7 +7,7 @@ import java.util.Set;
 //@Entity
 public class Data {
 
-//    protected Long id;
+    //    protected Long id;
     private ArrayList<String> urls = new ArrayList<>();
     private Set<Integer> notFound = new LinkedHashSet<>();
     private String articles;
@@ -23,7 +22,7 @@ public class Data {
 //    public Long getId() {return id;}
 //    public void setId(Long id) {this.id = id;}
 
-//    @Transient
+    //    @Transient
     public ArrayList<String> getUrls() {
         return urls;
     }
@@ -32,23 +31,7 @@ public class Data {
         this.urls = urls;
     }
 
-    public String getUrl(int index) {
-        return index >= 0 && index < urls.size() ? urls.get(index) : "Index " + index + " out of bounds";
-    }
-
-    public void setUrl(int index, String newValue) {
-        urls.set(index, newValue);
-    }
-
-    public void addUrl(String newUrl) {
-        urls.add(newUrl);
-    }
-
-    public void clearUrls() {
-        urls.clear();
-    }
-
-//    @Transient
+    //    @Transient
     public Set<Integer> getNotFound() {
         return notFound;
     }
@@ -57,32 +40,12 @@ public class Data {
         this.notFound = notFound;
     }
 
-    public boolean notFoundContains(int val) {
-        return notFound.contains(val);
-    }
-
-    public void addNotFound(int newValue) {
-        notFound.add(newValue);
-    }
-
-    public void removeNotFound(int val) {
-        notFound.remove(val);
-    }
-
-    public void clearNotFound() {
-        notFound.clear();
-    }
-
     public String getArticles() {
         return articles;
     }
 
     public void setArticles(String articles) {
         this.articles = articles;
-    }
-
-    public void clearArticles() {
-        articles = "";
     }
 
     public String getNotFoundUrls() {

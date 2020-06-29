@@ -1,9 +1,7 @@
 package whs.jo20046.controller;
 
-import org.hibernate.Session;
 import whs.jo20046.beans.Data;
 import whs.jo20046.feedreader.Feedreader;
-import de.whs.ina1.utils.PersistenceUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +13,7 @@ import java.net.URL;
 public class ControllerHelper extends HelperBase {
 
     protected Data data = new Data();
-//    private BeanAccessor beanAccessor;
+    //    private BeanAccessor beanAccessor;
     private boolean allConnectionsOk;
 
     public ControllerHelper(HttpServletRequest request, HttpServletResponse response) {
@@ -105,6 +103,7 @@ public class ControllerHelper extends HelperBase {
 
     /**
      * Redirects the to either the Output page (all sources were valid) or to the Hint page (1 or more sources didn't return OK earlier)
+     *
      * @throws IOException
      */
     private void redirect() throws IOException {
@@ -119,7 +118,6 @@ public class ControllerHelper extends HelperBase {
             response.sendRedirect("whs/jo20046/hinweis.jsp");
         }
     }
-
 
 
     public String getUrl(int index) {
