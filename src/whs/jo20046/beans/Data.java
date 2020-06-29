@@ -1,11 +1,14 @@
 package whs.jo20046.beans;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+//@Entity
 public class Data {
 
+//    protected Long id;
     private ArrayList<String> urls = new ArrayList<>();
     private Set<Integer> notFound = new LinkedHashSet<>();
     private String articles;
@@ -15,6 +18,12 @@ public class Data {
     public Data() {
     }
 
+//    @Id
+//    @GeneratedValue
+//    public Long getId() {return id;}
+//    public void setId(Long id) {this.id = id;}
+
+//    @Transient
     public ArrayList<String> getUrls() {
         return urls;
     }
@@ -39,6 +48,7 @@ public class Data {
         urls.clear();
     }
 
+//    @Transient
     public Set<Integer> getNotFound() {
         return notFound;
     }

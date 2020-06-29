@@ -7,6 +7,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="05_Hibernate_Persistenz" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="antlr-2.7.7" />
+          <element id="library" level="project" name="postgresql-42.2.14" />
+        </element>
       </element>
     </root>
   </artifact>

@@ -1,7 +1,9 @@
 package whs.jo20046.controller;
 
+import org.hibernate.Session;
 import whs.jo20046.beans.Data;
 import whs.jo20046.feedreader.Feedreader;
+import de.whs.ina1.utils.PersistenceUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import java.net.URL;
 public class ControllerHelper extends HelperBase {
 
     protected Data data = new Data();
+//    private BeanAccessor beanAccessor;
     private boolean allConnectionsOk;
 
     public ControllerHelper(HttpServletRequest request, HttpServletResponse response) {
@@ -32,19 +35,32 @@ public class ControllerHelper extends HelperBase {
             request.getSession().setAttribute("Data", data);
         }
 
+//        beanAccessor = new BeanAccessor(data);
+
         clearPreviousEntries();
         checkURLs();
         if (allConnectionsOk) getFeedContent();
         redirect();
+
+//        // Daten via Hibernate sichern
+//        PersistenceUtil<Data> persistenceUtil = new PersistenceUtil<>();
+//        Session hib_session = persistenceUtil.getSessionFactory().getCurrentSession();
+//        hib_session.beginTransaction();
+//
+//        hib_session.saveOrUpdate(data);
+//
+//        hib_session.getTransaction().commit();
+//        hib_session.close();
+//        persistenceUtil.closeSessionFactory();
     }
 
     /**
      * Clear URL-, NotFound-List and Articles-String. (For when the user goes back from the feed page to enter new sources)
      */
     private void clearPreviousEntries() {
-        data.clearUrls();
-        data.clearNotFound();
-        data.clearArticles();
+        clearUrls();
+        clearNotFound();
+        clearArticles();
     }
 
     /**
@@ -56,11 +72,11 @@ public class ControllerHelper extends HelperBase {
 
         data.setSources(Integer.parseInt(request.getParameter("sources")));
         for (int i = 0, sources = data.getSources(); i < sources; i++) {
-            data.addUrl(request.getParameter("url" + i));
+            addUrl(request.getParameter("url" + i));
         }
 
         for (int i = 0, urlsLength = data.getUrls().size(); i < urlsLength; i++) {
-            String urlInput = data.getUrl(i);
+            String urlInput = getUrl(i);
 
             if (!urlInput.startsWith("https://")) {
                 urlInput = "https://" + urlInput;
@@ -71,10 +87,10 @@ public class ControllerHelper extends HelperBase {
                 HttpURLConnection huc = (HttpURLConnection) url.openConnection();
                 huc.setRequestMethod("GET");
                 huc.getResponseCode();  // throws Exception if URL not found
-                data.removeNotFound(i);
+                removeNotFound(i);
             } catch (Exception e) {
                 allConnectionsOk = false;
-                data.addNotFound(i);
+                addNotFound(i);
             }
         }
     }
@@ -97,11 +113,41 @@ public class ControllerHelper extends HelperBase {
         else {
             data.setNotFoundUrls("Folgende URLs konnten nicht erreicht werden:<br>");
             for (Integer i : data.getNotFound()) {
-                data.setNotFoundUrls(data.getNotFoundUrls() + data.getUrl(i) + "<br>");
+                data.setNotFoundUrls(data.getNotFoundUrls() + getUrl(i) + "<br>");
             }
-            data.clearUrls();
+            clearUrls();
             response.sendRedirect("whs/jo20046/hinweis.jsp");
         }
+    }
+
+
+
+    public String getUrl(int index) {
+        return index >= 0 && index < data.getUrls().size() ? data.getUrls().get(index) : "Index " + index + " out of bounds";
+    }
+
+    public void addUrl(String newUrl) {
+        data.getUrls().add(newUrl);
+    }
+
+    public void clearUrls() {
+        data.getUrls().clear();
+    }
+
+    public void addNotFound(int newValue) {
+        data.getNotFound().add(newValue);
+    }
+
+    public void removeNotFound(int val) {
+        data.getNotFound().remove(val);
+    }
+
+    public void clearNotFound() {
+        data.getNotFound().clear();
+    }
+
+    public void clearArticles() {
+        data.setArticles("");
     }
 
 }
