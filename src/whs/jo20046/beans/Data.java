@@ -67,7 +67,7 @@ public class Data {
         this.notFoundUrls = notFoundUrls;
     }
 
-    @Transient
+//    @Transient
     public int getSources() {
         return sources;
     }

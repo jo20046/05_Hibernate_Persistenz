@@ -38,6 +38,7 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		
 		<mapping class="whs.jo20046.beans.Data"></mapping>
+        <mapping class="whs.jo20046.beans.Userdata"></mapping>
 
     </session-factory>
 

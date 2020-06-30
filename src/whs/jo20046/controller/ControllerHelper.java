@@ -41,15 +41,15 @@ public class ControllerHelper extends HelperBase {
 
 
         // Daten via Hibernate sichern
-        PersistenceUtil<Data> persistenceUtil = new PersistenceUtil<>();
-        Session hib_session = persistenceUtil.getSessionFactory().getCurrentSession();
-        hib_session.beginTransaction();
-
-        hib_session.saveOrUpdate(data);
-
-        hib_session.getTransaction().commit();
-        hib_session.close();
-        persistenceUtil.closeSessionFactory();
+//        PersistenceUtil<Data> persistenceUtil = new PersistenceUtil<>();
+//        Session hib_session = persistenceUtil.getSessionFactory().getCurrentSession();
+//        hib_session.beginTransaction();
+//
+//        hib_session.saveOrUpdate(data);
+//
+//        hib_session.getTransaction().commit();
+//        hib_session.close();
+//        persistenceUtil.closeSessionFactory();
 
 //        persistenceUtil.saveOrUpdate(data);
 

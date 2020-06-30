@@ -124,7 +124,7 @@ public class PersistenceUtil<BeanType> {
      * @param propertyValue		Wert des Propertys des Beans, mit dem selektiert werden soll
      * @return          		Liste der Beans, die die Bedingung erfüllen
      */
-	public List<BeanType> obtainWhere(Class<BeanType> beanTypeClass, String propertyName, Class<?> propertyClass, Object propertyValue) {
+	public List<BeanType> obtainWhere(Class<BeanType> beanTypeClass, String propertyName, /*Class<?> propertyClass, */Object propertyValue) {
 
 		Session hib_session = getSessionFactory().getCurrentSession();
 		hib_session.beginTransaction();
