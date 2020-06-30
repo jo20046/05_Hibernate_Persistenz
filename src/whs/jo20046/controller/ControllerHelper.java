@@ -1,5 +1,7 @@
 package whs.jo20046.controller;
 
+import de.whs.ina1.utils.PersistenceUtil;
+import org.hibernate.Session;
 import whs.jo20046.beans.Data;
 import whs.jo20046.feedreader.Feedreader;
 
@@ -13,7 +15,6 @@ import java.net.URL;
 public class ControllerHelper extends HelperBase {
 
     protected Data data = new Data();
-    //    private BeanAccessor beanAccessor;
     private boolean allConnectionsOk;
 
     public ControllerHelper(HttpServletRequest request, HttpServletResponse response) {
@@ -33,23 +34,30 @@ public class ControllerHelper extends HelperBase {
             request.getSession().setAttribute("Data", data);
         }
 
-//        beanAccessor = new BeanAccessor(data);
 
         clearPreviousEntries();
         checkURLs();
         if (allConnectionsOk) getFeedContent();
+
+
+        // Daten via Hibernate sichern
+        PersistenceUtil<Data> persistenceUtil = new PersistenceUtil<>();
+        Session hib_session = persistenceUtil.getSessionFactory().getCurrentSession();
+        hib_session.beginTransaction();
+
+        hib_session.saveOrUpdate(data);
+
+        hib_session.getTransaction().commit();
+        hib_session.close();
+        persistenceUtil.closeSessionFactory();
+
+//        persistenceUtil.saveOrUpdate(data);
+
+
+
+
         redirect();
 
-//        // Daten via Hibernate sichern
-//        PersistenceUtil<Data> persistenceUtil = new PersistenceUtil<>();
-//        Session hib_session = persistenceUtil.getSessionFactory().getCurrentSession();
-//        hib_session.beginTransaction();
-//
-//        hib_session.saveOrUpdate(data);
-//
-//        hib_session.getTransaction().commit();
-//        hib_session.close();
-//        persistenceUtil.closeSessionFactory();
     }
 
     /**

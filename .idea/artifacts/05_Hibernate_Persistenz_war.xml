@@ -5,8 +5,10 @@
       <element id="artifact" artifact-name="05_Hibernate_Persistenz:war exploded" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="lib">
-          <element id="library" level="project" name="antlr-2.7.7" />
           <element id="library" level="project" name="postgresql-42.2.14" />
+          <element id="library" level="project" name="org.hibernate:hibernate-core:5.4.10.Final" />
+          <element id="library" level="project" name="org.hibernate.validator:hibernate-validator:6.1.5.Final" />
+          <element id="library" level="project" name="javax.validation:validation-api:2.0.1.Final" />
         </element>
       </element>
     </root>
