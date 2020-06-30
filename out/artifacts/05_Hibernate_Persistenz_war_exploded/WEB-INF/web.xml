@@ -5,14 +5,22 @@
          version="4.0">
     <display-name>Praktikum5</display-name>
     <welcome-file-list>
-        <welcome-file>/whs/jo20046/eingabe.jsp</welcome-file>
+        <welcome-file>/whs/jo20046/willkommen.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
         <servlet-name>Check</servlet-name>
         <servlet-class>whs.jo20046.controller.Check</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>whs.jo20046.controller.RegisterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Check</servlet-name>
         <url-pattern>/check</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
 </web-app>

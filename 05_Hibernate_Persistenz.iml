@@ -29,7 +29,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.35" level="application_server_libraries" />
-    <orderEntry type="library" name="antlr-2.7.7" level="project" />
     <orderEntry type="library" name="postgresql-42.2.14" level="project" />
+    <orderEntry type="library" name="org.hibernate:hibernate-core:5.4.10.Final" level="project" />
+    <orderEntry type="library" name="org.hibernate.validator:hibernate-validator:6.1.5.Final" level="project" />
+    <orderEntry type="library" name="javax.validation:validation-api:2.0.1.Final" level="project" />
   </component>
 </module>
