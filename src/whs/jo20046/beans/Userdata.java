@@ -47,4 +47,8 @@ public class Userdata {
     public void setUrlList(String urlList) {
         this.urlList = urlList;
     }
+
+    public String urlsToHTMLString() {
+        return "Deine aktuell gespeicherten Quellen sind:<br><br>" + urlList.replace(";", "<br>");
+    }
 }

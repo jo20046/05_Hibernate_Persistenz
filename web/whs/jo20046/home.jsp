@@ -18,5 +18,9 @@
     <input type="submit" value="Quellen bearbeiten">
 </form>
 
+<br>
+<%=userdata.getUrlList().isEmpty() ? "Noch keine Quellen gespeichert." : userdata.urlsToHTMLString()%>
+
+
 </body>
 </html>
