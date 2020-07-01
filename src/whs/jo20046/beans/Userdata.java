@@ -10,6 +10,7 @@ public class Userdata {
     protected Long id;
     private String username;
     private String password;
+    private String urlList;
 
     public Userdata() {}
 
@@ -37,5 +38,13 @@ public class Userdata {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUrlList() {
+        return urlList;
+    }
+
+    public void setUrlList(String urlList) {
+        this.urlList = urlList;
     }
 }

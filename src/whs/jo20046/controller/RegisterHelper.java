@@ -116,6 +116,7 @@ public class RegisterHelper extends HelperBase {
         userdata.setId(copyFrom.getId());
         userdata.setUsername(copyFrom.getUsername());
         userdata.setPassword(copyFrom.getPassword());
+        userdata.setUrlList(copyFrom.getUrlList());
     }
 
     private void redirect() throws IOException {

@@ -9,7 +9,7 @@
     </welcome-file-list>
     <servlet>
         <servlet-name>Check</servlet-name>
-        <servlet-class>whs.jo20046.controller.Check</servlet-class>
+        <servlet-class>whs.jo20046.controller.CheckServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Register</servlet-name>

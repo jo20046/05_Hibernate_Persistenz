@@ -25,6 +25,10 @@
     <title>Eingabe</title>
 </head>
 <body>
+<form method="get" action="${pageContext.request.contextPath}/check">
+    <input type="submit" value="Alle bestehenden Quellen l&ouml;schen">
+</form>
+<br><br>
 <form method="post" action="${pageContext.request.contextPath}/check">
     <input type="submit" value="Best&auml;tigen"><br><br>
     <label for="sources">Anzahl Quellen: (max. 10) </label>
