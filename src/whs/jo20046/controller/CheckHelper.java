@@ -18,8 +18,8 @@ import java.util.List;
 public class CheckHelper extends HelperBase {
 
     protected Data data = new Data();
-    Userdata userdata;
-    PersistenceUtil<Userdata> persistenceUtil;
+    private Userdata userdata;
+    private PersistenceUtil<Userdata> persistenceUtil;
     private boolean allConnectionsOk;
 
     public CheckHelper(HttpServletRequest request, HttpServletResponse response) {
@@ -31,7 +31,7 @@ public class CheckHelper extends HelperBase {
 
 
         HttpSession session = request.getSession();
-        if (session.getAttribute("checkHelper") == null) { // TODO: NullPointer an dieser Stelle wenn man zu oft sumbittet (?)
+        if (session.getAttribute("checkHelper") == null) {
             request.getSession().setAttribute("checkHelper", this);
         }
 
@@ -60,7 +60,7 @@ public class CheckHelper extends HelperBase {
 
 
         HttpSession session = request.getSession();
-        if (session.getAttribute("checkHelper") == null) { // TODO: NullPointer an dieser Stelle wenn man zu oft sumbittet (?)
+        if (session.getAttribute("checkHelper") == null) {
             request.getSession().setAttribute("checkHelper", this);
         }
 

@@ -10,7 +10,7 @@
 %>
 <h4>Hallo <%=userdata.getUsername()%>!</h4><br>
 
-<form method="get" action="${pageContext.request.contextPath}/whs/jo20046/ausgabe.jsp">
+<form method="get" action="${pageContext.request.contextPath}/reader">
     <input type="submit" value="Newsfeed anzeigen">
 </form>
 
@@ -19,7 +19,7 @@
 </form>
 
 <br>
-<%=userdata.getUrlList().isEmpty() ? "Noch keine Quellen gespeichert." : userdata.urlsToHTMLString()%>
+<%=(userdata.getUrlList() == null || userdata.getUrlList().isEmpty()) ? "Noch keine Quellen gespeichert." : userdata.urlsToHTMLString()%>
 
 
 </body>

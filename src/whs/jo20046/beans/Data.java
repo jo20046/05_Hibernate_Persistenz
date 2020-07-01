@@ -1,14 +1,9 @@
 package whs.jo20046.beans;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Entity
 public class Data {
 
     protected Long id;
@@ -20,9 +15,6 @@ public class Data {
 
     public Data() {
     }
-
-    @Id
-    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -31,7 +23,6 @@ public class Data {
         this.id = id;
     }
 
-    @Transient
     public ArrayList<String> getUrls() {
         return urls;
     }
@@ -40,7 +31,6 @@ public class Data {
         this.urls = urls;
     }
 
-    @Transient
     public Set<Integer> getNotFound() {
         return notFound;
     }
@@ -49,7 +39,6 @@ public class Data {
         this.notFound = notFound;
     }
 
-    @Transient
     public String getArticles() {
         return articles;
     }
@@ -58,7 +47,6 @@ public class Data {
         this.articles = articles;
     }
 
-    @Transient
     public String getNotFoundUrls() {
         return notFoundUrls;
     }
@@ -67,7 +55,6 @@ public class Data {
         this.notFoundUrls = notFoundUrls;
     }
 
-//    @Transient
     public int getSources() {
         return sources;
     }

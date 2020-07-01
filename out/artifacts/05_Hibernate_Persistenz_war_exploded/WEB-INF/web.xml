@@ -16,9 +16,13 @@
         <servlet-class>whs.jo20046.controller.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Login</servlet-name>
-        <servlet-class>whs.jo20046.controller.LoginServlet</servlet-class>
+        <servlet-name>Reader</servlet-name>
+        <servlet-class>whs.jo20046.controller.ReaderServlet</servlet-class>
     </servlet>
+<!--    <servlet>-->
+<!--        <servlet-name>Login</servlet-name>-->
+<!--        <servlet-class>whs.jo20046.controller.LoginServlet</servlet-class>-->
+<!--    </servlet>-->
     <servlet-mapping>
         <servlet-name>Check</servlet-name>
         <url-pattern>/check</url-pattern>
@@ -28,7 +32,11 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <servlet-name>Reader</servlet-name>
+        <url-pattern>/reader</url-pattern>
     </servlet-mapping>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Login</servlet-name>-->
+<!--        <url-pattern>/login</url-pattern>-->
+<!--    </servlet-mapping>-->
 </web-app>

@@ -11,8 +11,8 @@ import java.util.List;
 
 public class RegisterHelper extends HelperBase {
 
-    Userdata userdata;
-    PersistenceUtil<Userdata> persistenceUtil;
+    private Userdata userdata;
+    private PersistenceUtil<Userdata> persistenceUtil;
 
     boolean successful;
 
