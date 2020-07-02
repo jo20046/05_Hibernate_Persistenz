@@ -123,7 +123,9 @@ public class CheckHelper extends HelperBase {
 
         allConnectionsOk = true;
 
-        data.setSources(Integer.parseInt(request.getParameter("sources")));
+        String sourcesStr = request.getParameter("sources");
+        if (sourcesStr == null || sourcesStr.equals("")) sourcesStr = "0";
+        data.setSources(Integer.parseInt(sourcesStr));
         for (int i = 0, sources = data.getSources(); i < sources; i++) {
             addUrl(request.getParameter("url" + i));
         }

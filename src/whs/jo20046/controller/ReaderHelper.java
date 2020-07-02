@@ -59,8 +59,11 @@ public class ReaderHelper extends HelperBase {
     }
 
     private ArrayList<String> getUrls() {
+
         if (userdata.getUrlList() == null) userdata.setUrlList("");
         ArrayList<String> urls = new ArrayList<>(Arrays.asList(userdata.getUrlList().split(";")));
+        urls.removeAll(Arrays.asList("", null)); // remove empty elements from URL list
+
         for (int i = 0, urlsSize = urls.size(); i < urlsSize; i++) {
             urls.set(i, "https://" + urls.get(i));
         }
@@ -68,8 +71,13 @@ public class ReaderHelper extends HelperBase {
     }
 
     private void getFeedContent(ArrayList<String> urls) {
-        Feedreader feedreader = new Feedreader(urls);
-        data.setArticles(feedreader.getRssContent());
+
+        if (!urls.isEmpty()) {
+            Feedreader feedreader = new Feedreader(urls);
+            data.setArticles(feedreader.getRssContent());
+        } else {
+            data.setArticles("Es wurden keine Quellen eingegeben.");
+        }
     }
 
 
