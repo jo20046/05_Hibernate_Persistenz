@@ -27,8 +27,8 @@ public class ReaderHelper extends HelperBase {
     @Override
     public void doGet() throws ServletException, IOException {
 
-        if (request.getSession().getAttribute("checkHelper") == null) {
-            request.getSession().setAttribute("checkHelper", this);
+        if (request.getSession().getAttribute("readerHelper") == null) {
+            request.getSession().setAttribute("readerHelper", this);
         }
 
         if (request.getSession().getAttribute("userdata") == null) {
