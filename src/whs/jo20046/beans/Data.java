@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Bean für die temporäre Speicherung von URLs für den Feedreader
+ */
 public class Data {
 
     protected Long id;
@@ -15,6 +18,7 @@ public class Data {
 
     public Data() {
     }
+
     public Long getId() {
         return id;
     }

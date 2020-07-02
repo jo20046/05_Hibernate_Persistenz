@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * Zentrales Benutzer-Bean: Benutzername, Passwort und gespeicherte URLs
+ */
 @Entity
 public class Userdata {
 
@@ -12,7 +15,8 @@ public class Userdata {
     private String password;
     private String urlList;
 
-    public Userdata() {}
+    public Userdata() {
+    }
 
     @Id
     @GeneratedValue

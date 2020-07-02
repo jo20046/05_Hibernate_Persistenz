@@ -3,7 +3,6 @@ package whs.jo20046.controller;
 import de.whs.ina1.utils.PersistenceUtil;
 import whs.jo20046.beans.Data;
 import whs.jo20046.beans.Userdata;
-import whs.jo20046.feedreader.Feedreader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Helper für eingabe.jsp ("Checkt" die eingegebenen URLs und/oder löscht bestehende)
+ */
 public class CheckHelper extends HelperBase {
 
     protected Data data = new Data();
@@ -86,29 +88,12 @@ public class CheckHelper extends HelperBase {
         clearPreviousEntries();
         checkURLs();
         if (allConnectionsOk) saveNewURLsInBean();
-//        if (allConnectionsOk) getFeedContent();
-
-
-        // Daten via Hibernate sichern
-//        PersistenceUtil<Data> persistenceUtil = new PersistenceUtil<>();
-//        Session hib_session = persistenceUtil.getSessionFactory().getCurrentSession();
-//        hib_session.beginTransaction();
-//
-//        hib_session.saveOrUpdate(data);
-//
-//        hib_session.getTransaction().commit();
-//        hib_session.close();
-//        persistenceUtil.closeSessionFactory();
-
-//        persistenceUtil.saveOrUpdate(data);
-
-
         redirect();
 
     }
 
     /**
-     * Clear URL-, NotFound-List and Articles-String. (For when the user goes back from the feed page to enter new sources)
+     * Löscht etwaige Einträge von früheren Besuchen
      */
     private void clearPreviousEntries() {
         clearUrls();
@@ -117,7 +102,7 @@ public class CheckHelper extends HelperBase {
     }
 
     /**
-     * Check if all entered URLs are valid sources. Sets "allConnectionsOk" accordingly.
+     * Überprüft, ob alle vom Benutzer übergegebenen URLs gültig sind
      */
     private void checkURLs() {
 
@@ -150,13 +135,15 @@ public class CheckHelper extends HelperBase {
         }
     }
 
+    /**
+     * Speichert die eingegebenen URLs im Benutzer-Bean
+     */
     private void saveNewURLsInBean() {
 
         String urlList = userdata.getUrlList();
         if (urlList == null) urlList = "";
         List<String> savedURLs = new ArrayList<>(Arrays.asList(urlList.split(";")));
         savedURLs.removeAll(Arrays.asList("", null));
-//        String savedURLs = userdata.getUrlList();
 
         for (int i = 0, urlsLength = data.getUrls().size(); i < urlsLength; i++) {
             String urlInput = getUrl(i);
@@ -171,15 +158,7 @@ public class CheckHelper extends HelperBase {
     }
 
     /**
-     * Calls the Feedreader and saves content to Data.Articles
-     */
-    private void getFeedContent() {
-        Feedreader feedreader = new Feedreader(data.getUrls());
-        data.setArticles(feedreader.getRssContent());
-    }
-
-    /**
-     * Redirects the to either the Output page (all sources were valid) or to the Hint page (1 or more sources didn't return OK earlier)
+     * Weiterleitung zu home.jsp wenn alle eingegebenen URLs korrekt waren, sonst zu hinweis.jsp
      *
      * @throws IOException
      */

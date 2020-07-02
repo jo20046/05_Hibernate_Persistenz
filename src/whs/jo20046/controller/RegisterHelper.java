@@ -11,10 +11,9 @@ import java.util.List;
 
 public class RegisterHelper extends HelperBase {
 
+    boolean successful;
     private Userdata userdata;
     private PersistenceUtil<Userdata> persistenceUtil;
-
-    boolean successful;
 
     public RegisterHelper(HttpServletRequest request, HttpServletResponse response) {
         super(request, response);
@@ -51,9 +50,6 @@ public class RegisterHelper extends HelperBase {
             default:
                 break;
         }
-
-//        successful = setUserCredentials();
-//        redirect();
     }
 
     private void doLogin() throws IOException {
@@ -68,6 +64,7 @@ public class RegisterHelper extends HelperBase {
 
     /**
      * Speichert die eingegebenen Anmeldedaten in der Datenbank und im Bean, insofern der Benutzername noch nicht verwendet wird
+     *
      * @return true wenn die Daten gespeichert wurden, sonst false
      */
     private boolean setUserCredentials() {
@@ -88,7 +85,8 @@ public class RegisterHelper extends HelperBase {
 
     /**
      * Überprüft die eingegebenen Anmeldedaten
-     * @return true, wenn die Anmeldedaten in der Datenbank gefunden wurde, sonst false
+     *
+     * @return true, wenn die Anmeldedaten in der Datenbank gefunden wurden, sonst false
      */
     private boolean checkCredentials() {
 
@@ -112,6 +110,11 @@ public class RegisterHelper extends HelperBase {
         return true;
     }
 
+    /**
+     * Speichert die Daten aus dem Userdata-Objekt aus der Datenbank im lokalen Userdata-Bean
+     *
+     * @param copyFrom das Userdata-Objekt aus der Datenbank
+     */
     private void copyUserdata(Userdata copyFrom) {
         userdata.setId(copyFrom.getId());
         userdata.setUsername(copyFrom.getUsername());
@@ -119,6 +122,11 @@ public class RegisterHelper extends HelperBase {
         userdata.setUrlList(copyFrom.getUrlList());
     }
 
+    /**
+     * Leitet den Nutzer auf die Homepage weiter, wenn Login/Registrierung erfolgreich war, bzw. zurück zur Login/Registrierungsseite, wenn es ein Problem mit den Anmeldedaten gab
+     *
+     * @throws IOException
+     */
     private void redirect() throws IOException {
         response.sendRedirect(successful ? "whs/jo20046/home.jsp" : "whs/jo20046/registrierung.jsp?intent=" + request.getParameter("intent"));
     }

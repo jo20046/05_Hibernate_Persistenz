@@ -8,11 +8,9 @@ import whs.jo20046.feedreader.Feedreader;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class ReaderHelper extends HelperBase {
 
@@ -58,6 +56,11 @@ public class ReaderHelper extends HelperBase {
         response.sendRedirect("whs/jo20046/ausgabe.jsp");
     }
 
+    /**
+     * Holt die URL-Liste vom Benutzer-Bean und fügt ggf. "https://" hinzu
+     *
+     * @return die aufbereitete URL-Liste
+     */
     private ArrayList<String> getUrls() {
 
         if (userdata.getUrlList() == null) userdata.setUrlList("");
@@ -70,6 +73,11 @@ public class ReaderHelper extends HelperBase {
         return urls;
     }
 
+    /**
+     * Ruft den Feedreader auf und speichert den Feed-Inhalt im Data-Bean
+     *
+     * @param urls die URL-Liste, die nach RSS-Feeds durchsucht werden soll
+     */
     private void getFeedContent(ArrayList<String> urls) {
 
         if (!urls.isEmpty()) {
