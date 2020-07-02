@@ -1,8 +1,11 @@
 package whs.jo20046.beans;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
 
 /**
  * Zentrales Benutzer-Bean: Benutzername, Passwort und gespeicherte URLs
@@ -28,6 +31,8 @@ public class Userdata {
         this.id = id;
     }
 
+    @Pattern(regexp = "\\w+", message = "Der Benutzername darf nur Buchstaben, Zahlen und Unterstriche enthalten")
+    @Length(min = 3, max = 15, message = "Die Länge des Benutzernamens muss zwischen 3 und 15 liegen")
     public String getUsername() {
         return username;
     }
@@ -36,6 +41,7 @@ public class Userdata {
         this.username = username;
     }
 
+    @Length(min = 8, max = 64, message = "Die Länge des Passworts muss zwischen 8 und 64 liegen")
     public String getPassword() {
         return password;
     }

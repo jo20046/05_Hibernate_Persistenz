@@ -1,11 +1,14 @@
 package whs.jo20046.controller;
 
 import de.whs.ina1.utils.PersistenceUtil;
+import de.whs.ina1.utils.ValidationUtil;
 import whs.jo20046.beans.Userdata;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,6 +17,7 @@ public class RegisterHelper extends HelperBase {
     boolean successful;
     private Userdata userdata;
     private PersistenceUtil<Userdata> persistenceUtil;
+    private ValidationUtil<Userdata> validationUtil;
 
     public RegisterHelper(HttpServletRequest request, HttpServletResponse response) {
         super(request, response);
@@ -38,6 +42,13 @@ public class RegisterHelper extends HelperBase {
             request.getSession().setAttribute("persistenceUtil", persistenceUtil);
         } else {
             persistenceUtil = (PersistenceUtil<Userdata>) request.getSession().getAttribute("persistenceUtil");
+        }
+
+        if (request.getSession().getAttribute("validationUtil") == null) {
+            validationUtil = new ValidationUtil<>();
+            request.getSession().setAttribute("validationUtil", validationUtil);
+        } else {
+            validationUtil = (ValidationUtil<Userdata>) request.getSession().getAttribute("validationUtil");
         }
 
         switch (request.getParameter("intent")) {
@@ -75,8 +86,18 @@ public class RegisterHelper extends HelperBase {
             request.getSession().setAttribute("failureMessage", "");
             userdata.setUsername(request.getParameter("usernameInput"));
             userdata.setPassword(request.getParameter("password"));
-            persistenceUtil.saveOrUpdate(userdata);
-            return true;
+
+            if (validationUtil.isValid(userdata)) {
+                persistenceUtil.saveOrUpdate(userdata);
+                return true;
+            } else {
+                StringBuilder failureMessage = new StringBuilder("<br>");
+                for (ConstraintViolation<Userdata> violation : validationUtil.getViolations()) {
+                    failureMessage.append(violation.getMessage()).append("<br>");
+                }
+                request.getSession().setAttribute("failureMessage", failureMessage);
+                return false;
+            }
         } else {
             request.getSession().setAttribute("failureMessage", "<br>Dieser Benutzername wird bereits benutzt. Bitte wähle einen anderen Namen aus.");
             return false;
